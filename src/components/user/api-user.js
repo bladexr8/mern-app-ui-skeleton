@@ -24,9 +24,12 @@ const create = async (user) => {
 // list users
 const list = async (signal) => {
   try {
+    console.log('***Requesting User List from API...');
+    console.log(`${API_ENDPOINT}/api/users`);
+    console.log(signal);
     let response = await fetch(`${API_ENDPOINT}/api/users`, {
       method: 'GET',
-      signal: signal
+      //signal: signal
     });
     return await response.json();
   } catch (err) {
@@ -41,7 +44,7 @@ const read = async (params, credentials, signal) => {
   try {
     let response = await fetch(`${API_ENDPOINT}/api/users/${params.userId}`, {
       method: 'GET',
-      signal: signal,
+      //signal: signal,
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',

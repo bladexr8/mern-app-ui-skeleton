@@ -61,7 +61,7 @@ const Users = () => {
                   <Person />
                 </Avatar>
               </ListItemAvatar>
-              <ListItemText primaary={item.name} />
+              <ListItemText primary={item.name} />
               <ListItemSecondaryAction>
                 <IconButton>
                   <ArrowForward />
