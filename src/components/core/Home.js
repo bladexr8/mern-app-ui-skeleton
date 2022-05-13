@@ -5,6 +5,7 @@ import CardContent from '@material-ui/core/CardContent'
 import CardMedia from '@material-ui/core/CardMedia'
 import Typography from '@material-ui/core/Typography'
 import unicornbikeImg from './../../assets/images/unicornbike.jpeg'
+import {Link} from 'react-router-dom'
 
 // Material-UI styles
 const useStyles = makeStyles(theme => ({
@@ -26,6 +27,7 @@ const Home = () => {
   console.log('***Rendering Home Component...');
   const classes = useStyles();
   return (
+    <div>
     <Card className={classes.card}>
       <Typography variant="h6" className={classes.title}>
         Home Page
@@ -37,6 +39,9 @@ const Home = () => {
         </Typography>
       </CardContent>
     </Card>
+    <Link to="/users">Users</Link>
+    </div>
+    
   );
   
 }
