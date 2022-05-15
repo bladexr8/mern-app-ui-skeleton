@@ -8,9 +8,8 @@ import Typography from '@material-ui/core/Typography'
 import Icon from '@material-ui/core/Icon'
 import { makeStyles } from '@material-ui/core/styles'
 import auth from './../auth/auth-helper'
-import {Redirect} from 'react-router-dom'
+import {Navigate} from 'react-router-dom'
 import {signin} from './api-auth.js'
-import { SignalCellularNoSimOutlined } from '@material-ui/icons'
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -79,7 +78,7 @@ const SignIn = (props) => {
 
   const { redirectToReferrer } = values
   if (redirectToReferrer) {
-    return (<Redirect to={from} />)
+    return (<Navigate to={from} />)
   }
 
   return (
