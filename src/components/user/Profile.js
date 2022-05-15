@@ -52,7 +52,7 @@ const Profile = ({ match }) => {
     return function cleanup() {
       abortController.abort();
     }
-  }, [match.params.userId])
+  }, [jwt.token, match.params.userId])
 
   if (redirectToSignin) {
     return <Navigate to='/signin' />
@@ -71,7 +71,7 @@ const Profile = ({ match }) => {
             </Avatar>
           </ListItemAvatar>
           <ListItemText primary={user.name} secondary={user.email}/> {
-           auth.isAuthenticated().user && auth.isAuthenticated().user._id == user._id &&
+           auth.isAuthenticated().user && auth.isAuthenticated().user._id === user._id &&
             (<ListItemSecondaryAction>
               <Link to={"/user/edit/" + user._id}>
                 <IconButton aria-label="Edit" color="primary">

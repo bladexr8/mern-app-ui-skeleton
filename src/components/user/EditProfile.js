@@ -66,7 +66,7 @@ export default function EditProfile({ match }) {
       abortController.abort()
     }
 
-  }, [match.params.userId])
+  }, [jwt.token, match.params.userId, values])
 
   const clickSubmit = () => {
     const user = {
