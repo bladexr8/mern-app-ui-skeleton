@@ -39,8 +39,6 @@ const Home = () => {
         </Typography>
       </CardContent>
     </Card>
-    <Link to="/users">Users</Link><br />
-    <Link to="/signup">Sign Up</Link>
     </div>
     
   );
