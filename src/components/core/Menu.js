@@ -20,8 +20,8 @@ const isActive = (location, path) => {
 const Menu = () => {
   let history = useNavigate();
   let location = useLocation();
-  console.log('***Location');
-  console.log(location);
+  //console.log('***Location');
+  //console.log(location);
   return (
     <AppBar position="static">
       <Toolbar>
