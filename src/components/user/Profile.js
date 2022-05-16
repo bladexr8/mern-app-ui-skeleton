@@ -12,10 +12,14 @@ import Typography from '@material-ui/core/Typography'
 import Edit from '@material-ui/icons/Edit'
 import Person from '@material-ui/icons/Person'
 import Divider from '@material-ui/core/Divider'
-import DeleteUser from './DeleteUser'
+//import DeleteUser from './DeleteUser'
 import auth from './../auth/auth-helper'
 import {read} from './api-user.js'
-import {Navigate, Link, useParams } from 'react-router-dom'
+import {Navigate, Link, useParams, useLocation } from 'react-router-dom'
+
+/**
+ * <DeleteUser userId={user._id}/>
+ */
 
 const useStyles = makeStyles(theme => ({
   root: theme.mixins.gutters({
@@ -30,12 +34,15 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const Profile = ({ match }) => {
+const Profile = () => {
   const classes = useStyles()
   const [user, setUser] = useState({})
   const [redirectToSignin, setRedirectToSignin] = useState(false)
   const jwt = auth.isAuthenticated()
   const params = useParams();
+
+  // get current location
+  const currentLocation = useLocation();
 
   console.log('***Displaying User Profile...');
   console.log(params);
@@ -59,7 +66,7 @@ const Profile = ({ match }) => {
   }, [jwt.token, params.userId])
 
   if (redirectToSignin) {
-    return <Navigate to='/signin' />
+    return <Navigate to='/signin' state={{ currentLocation }} />
   }
 
   return (
@@ -82,7 +89,6 @@ const Profile = ({ match }) => {
                   <Edit/>
                 </IconButton>
               </Link>
-              <DeleteUser userId={user._id}/>
             </ListItemSecondaryAction>)
           }
         </ListItem>

@@ -6,13 +6,15 @@ const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT || '';
 // sign in a user
 const signin = async (user) => {
   try {
+    //console.log('***api-auth->signin->user');
+    //console.log(user);
     let response = await fetch(`${API_ENDPOINT}/auth/signin`, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-      credentials: 'include',
+      //credentials: 'include',
       body: JSON.stringify(user)
     });
     return await response.json();

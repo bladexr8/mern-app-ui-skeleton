@@ -9,7 +9,7 @@ import Icon from '@material-ui/core/Icon'
 import { makeStyles } from '@material-ui/core/styles'
 import auth from './../auth/auth-helper'
 import {read, update} from './api-user.js'
-import {Navigate} from 'react-router-dom'
+import {Navigate, useParams} from 'react-router-dom'
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -48,13 +48,15 @@ export default function EditProfile({ match }) {
     redirectToProfile: false
   })
   const jwt = auth.isAuthenticated()
+  const params = useParams();
+  //console.log(params);
 
   useEffect(() => {
     const abortController = new AbortController()
     const signal = abortController.signal
 
     read({
-      userId: match.params.userId
+      userId: params.userId
     }, {t: jwt.token}, signal).then((data) => {
       if (data && data.error) {
         setValues({...values, error: data.error})
@@ -66,7 +68,7 @@ export default function EditProfile({ match }) {
       abortController.abort()
     }
 
-  }, [jwt.token, match.params.userId, values])
+  }, [params.userId])
 
   const clickSubmit = () => {
     const user = {
@@ -75,7 +77,7 @@ export default function EditProfile({ match }) {
       password: values.password || undefined
     }
     update({
-      userId: match.params.userId
+      userId: params.userId
     }, {
       t: jwt.token
     }, user).then((data) => {
@@ -87,7 +89,10 @@ export default function EditProfile({ match }) {
     })
   }
   const handleChange = name => event => {
-    setValues({...values, [name]: event.target.value})
+    setValues({
+      ...values,
+      [name]: event.target.value
+    })
   }
 
     if (values.redirectToProfile) {

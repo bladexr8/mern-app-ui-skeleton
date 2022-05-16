@@ -8,7 +8,7 @@ import Typography from '@material-ui/core/Typography'
 import Icon from '@material-ui/core/Icon'
 import { makeStyles } from '@material-ui/core/styles'
 import auth from './../auth/auth-helper'
-import {Navigate} from 'react-router-dom'
+import {Navigate, useNavigate, useLocation} from 'react-router-dom'
 import {signin} from './api-auth.js'
 
 const useStyles = makeStyles(theme => ({
@@ -46,13 +46,21 @@ const SignIn = (props) => {
       redirectToReferrer: false
   })
 
+  let location = useLocation();
+  //console.log(location);
+
   const clickSubmit = () => {
     const user = {
       email: values.email || undefined,
       password: values.password || undefined
     }
 
+    //console.log('***user');
+    //console.log(user);
+
     signin(user).then((data) => {
+      console.log('***after signin...');
+      console.log(data);
       if (data.error) {
         setValues({ ...values, error: data.error})
       } else {
@@ -70,15 +78,12 @@ const SignIn = (props) => {
     })
   }
 
-  const { from } = props.location.state || {
-    from: {
-      pathname: '/'
-    }
-  }
+  // set up re-direct back to referring page (if applicable)
+  const referrerUrl  = location.state.currentLocation.pathname || '/';
 
   const { redirectToReferrer } = values
   if (redirectToReferrer) {
-    return (<Navigate to={from} />)
+    return (<Navigate to={referrerUrl} />)
   }
 
   return (
