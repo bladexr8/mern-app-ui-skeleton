@@ -1,10 +1,10 @@
 // declare protected routes for the frontend to restrict view access based on user auth.
 
-import React, { Component } from 'react'
-import { Route, Navigate } from 'react-router-dom'
+import React from 'react'
+import { Outlet, Navigate } from 'react-router-dom'
 import auth from './auth-helper'
 
-const PrivateRoute = ({ component: Component, ...rest}) => (
+/*const PrivateRoute = ({ component: Component, ...rest}) => (
   <Route {...rest} render={props => (
     auth.isAuthenticated ? (
       <Component {...props} />
@@ -15,6 +15,13 @@ const PrivateRoute = ({ component: Component, ...rest}) => (
       }} />
     )
   )} />
-)
+)*/
+
+const PrivateRoute = () => {
+  const authenticated = auth.isAuthenticated;
+
+  return auth ? <Outlet /> : <Navigate to='/signin' ></Navigate>
+}
+
 
 export default PrivateRoute;

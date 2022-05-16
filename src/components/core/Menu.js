@@ -6,17 +6,22 @@ import IconButton from '@material-ui/core/IconButton'
 import HomeIcon from '@material-ui/icons/Home'
 import Button from '@material-ui/core/Button'
 import auth from './../auth/auth-helper'
-import {Link, useNavigate} from 'react-router-dom'
+import {Link, useNavigate, useLocation } from 'react-router-dom'
 
-const isActive = (history, path) => {
-  if (history.location.pathname === path)
+
+
+const isActive = (location, path) => {
+  if (location.pathname === path)
     return {color: '#ff4081'}
   else
     return {color: '#ffffff'}
 }
 
 const Menu = () => {
-  const history = useNavigate();
+  let history = useNavigate();
+  let location = useLocation();
+  console.log('***Location');
+  console.log(location);
   return (
     <AppBar position="static">
       <Toolbar>
@@ -24,7 +29,7 @@ const Menu = () => {
           MERN Skeleton
         </Typography>
         <Link to="/">
-          <IconButton aria-label="Home" style={isActive(history, "/")}>
+          <IconButton aria-label="Home" style={isActive(location, "/")}>
             <HomeIcon/>
           </IconButton>
         </Link>

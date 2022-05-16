@@ -19,7 +19,9 @@ const MainRouter = () => {
         <Route path="/users" element={<Users />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path='/signin' element={<SignIn />} />
-        <PrivateRoute path="/user/edit/:userId" element={<EditProfile />} />
+        <Route exact path="/user/edit/:userId" element={<PrivateRoute />}>
+          <Route exact path='/user/edit/:userId' element={<EditProfile />} />
+        </Route>
         <Route path="/user/:userId" element={<Profile />} />
       </Routes>
     </div>
