@@ -23,10 +23,11 @@ const create = async (user) => {
 
 // list users
 const list = async (signal) => {
+  console.log(`API_ENDPOINT = ${API_ENDPOINT}`);
   try {
     console.log('***Requesting User List from API...');
     console.log(`${API_ENDPOINT}/api/users`);
-    console.log(signal);
+    //console.log(signal);
     let response = await fetch(`${API_ENDPOINT}/api/users`, {
       method: 'GET',
       //signal: signal
